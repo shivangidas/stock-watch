@@ -1,0 +1,6 @@
+.tableHead {
+  background-color: bisque;
+}
+.table tbody tr:nth-child(even) {
+  background-color: darkgray;
+}

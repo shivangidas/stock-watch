@@ -7,6 +7,10 @@ const links = [
     name: "Search",
     href: "/search",
   },
+  {
+    name: "News",
+    href: "/news"
+  }
 ];
 
 export default links;

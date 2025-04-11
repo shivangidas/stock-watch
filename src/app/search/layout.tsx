@@ -1,7 +1,7 @@
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div> The search Page</div>
+      <h2> Companies details</h2>
       <main>{children}</main>
     </>
   );

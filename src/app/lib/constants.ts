@@ -1,0 +1,1 @@
+export const api_key = process.env.NEXT_PUBLIC_FINNHUB_API_KEY;

@@ -1,5 +1,5 @@
-// import styles from "./page.module.css";
-import "dotenv/config";
+import "./page.module.css";
+
 export default function Home() {
-  return <></>;
+  return <>Hello!</>;
 }
