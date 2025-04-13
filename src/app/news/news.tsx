@@ -1,7 +1,7 @@
 "use client";
-import Link from "next/link";
 import { News } from "../lib/definitions";
 import { useState } from "react";
+import styles from "./news.module.css"
 
 export default function NewsSection({ data }: { data: News[] }) {
     const [category, setCategory] = useState("");
@@ -13,13 +13,13 @@ export default function NewsSection({ data }: { data: News[] }) {
             <select name="selectedCategory" value={category} onChange={(e) => setCategory(e.target.value)}>
                 {filters.map(op => <option key={op} value={op}>{op}</option>)}
             </select>
-            <ul>
+            <ul className={styles.list}>
                 {
                     allNews.map(news => {
                         return <li key={news.id}>
-                            <b>{news.category}</b> {news.headline} {new Date(news.datetime * 1000).toString()}
+                            {news.headline} {new Date(news.datetime * 1000).toString()}
                             {" "}
-                            <Link href={news.url}>link</Link>
+                            <a href={news.url}>link</a> {" "}<b>{news.category}</b>
                         </li>
                     })
                 }

@@ -31,3 +31,18 @@ export type CompanyProfile = {
   logo: string,
   finnhubIndustry: string
 }
+
+export type Country = {
+  code2: string,
+  code3: string,
+  codeNo: string,
+  country: string,
+  countryRiskPremium: number,
+  currency: string,
+  currencyCode: string,
+  defaultSpread: number,
+  equityRiskPremium: number,
+  rating: string,
+  region: string,
+  subRegion: string
+}

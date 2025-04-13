@@ -10,6 +10,10 @@ const links = [
   {
     name: "News",
     href: "/news"
+  },
+  {
+    name: "Country List",
+    href: "/country"
   }
 ];
 

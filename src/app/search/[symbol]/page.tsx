@@ -33,8 +33,6 @@ export default async function Page({ params }: { params: Promise<{ symbol: strin
             <p>Exchange: {company.exchange} </p>
             <p>Country: {company.country} </p>
             <p>Market cap: {company.marketCapitalization} </p>
-
-
             <NewsSection data={news}></NewsSection>
         </>
     )

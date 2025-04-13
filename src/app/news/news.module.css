@@ -1,0 +1,8 @@
+.list {
+  text-decoration: none;
+  list-style-type: square;
+}
+
+.list li {
+  padding: 4px;
+}

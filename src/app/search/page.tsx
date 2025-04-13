@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { Stock } from "../lib/definitions";
-import styles from "./page.module.css";
 import { api_key } from "../lib/constants";
-import Link from "next/link";
+import Table from "../lib/table";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState("");
@@ -17,19 +16,6 @@ export default function Search() {
     const data = await response.json();
     setStockList(data.result);
   }
-
-  const headers = stockList.length > 0 ? Object.keys(stockList[0]) : [];
-  const head = headers.map(h => <th key={h}>{h}</th>)
-  const body = stockList.map(stock => {
-    return (
-      <tr key={stock.symbol}>
-        <td>{stock.description}</td>
-        <td>{stock.displaySymbol}</td>
-        <td>{stock.symbol} <Link href={`/search/${stock.symbol}`}>Company Profile</Link></td>
-        <td>{stock.type}</td>
-      </tr>
-    )
-  })
   return (
     <>
       <h2>Search Page</h2>
@@ -40,16 +26,7 @@ export default function Search() {
       </form >
       {stockList.length === 0 ? "Search something" :
         <><div>Search Results</div>
-          <table className={styles.table}>
-            <thead>
-              <tr className={styles.tableHead}>
-                {head}
-              </tr>
-            </thead>
-            <tbody>
-              {body}
-            </tbody>
-          </table>
+          <Table<Stock, keyof Stock> bodyData={stockList} keyId="symbol" link={true}></Table>
         </>
       }
 
