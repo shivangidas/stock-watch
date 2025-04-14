@@ -14,6 +14,10 @@ const links = [
   {
     name: "Country List",
     href: "/country"
+  },
+  {
+    name: "News v2",
+    href: "/newsV2"
   }
 ];
 

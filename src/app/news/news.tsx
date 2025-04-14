@@ -10,7 +10,7 @@ export default function NewsSection({ data }: { data: News[] }) {
     return (
         <>
             <label htmlFor="selectedCategory">Pick a category</label>
-            <select name="selectedCategory" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <select name="selectedCategory" id="selectedCategory" value={category} onChange={(e) => setCategory(e.target.value)}>
                 {filters.map(op => <option key={op} value={op}>{op}</option>)}
             </select>
             <ul className={styles.list}>

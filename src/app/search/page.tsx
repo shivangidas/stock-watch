@@ -25,7 +25,7 @@ export default function Search() {
         <button onClick={handleClick}>Find me things</button>
       </form >
       {stockList.length === 0 ? "Search something" :
-        <><div>Search Results</div>
+        <><h2>Search Results</h2>
           <Table<Stock, keyof Stock> bodyData={stockList} keyId="symbol" link={true}></Table>
         </>
       }

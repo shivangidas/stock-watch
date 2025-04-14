@@ -1,7 +1,8 @@
 import { api_key } from "@/app/lib/constants";
 import { CompanyProfile, News } from "@/app/lib/definitions";
-import NewsSection from "@/app/news/news";
+import NewsV2 from "@/app/newsV2/news";
 import Link from "next/link";
+import { Suspense } from "react";
 
 async function getNews(symbol: string) {
     const today = new Date();
@@ -13,7 +14,7 @@ async function getNews(symbol: string) {
     const response = await fetch(
         `https://finnhub.io/api/v1/company-news?symbol=${symbol}&from=${fromDate}&to=${toDate}&token=${api_key}`
     );
-    return await response.json();
+    return response.json();
 }
 export default async function Page({ params }: { params: Promise<{ symbol: string }> }) {
     const { symbol } = await params
@@ -21,7 +22,7 @@ export default async function Page({ params }: { params: Promise<{ symbol: strin
         `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${api_key}`
     );
     const company: CompanyProfile = await response.json();
-    const news: News[] = await getNews(symbol)
+    const news: Promise<News[]> = getNews(symbol)
 
     return (
         <>
@@ -33,7 +34,10 @@ export default async function Page({ params }: { params: Promise<{ symbol: strin
             <p>Exchange: {company.exchange} </p>
             <p>Country: {company.country} </p>
             <p>Market cap: {company.marketCapitalization} </p>
-            <NewsSection data={news}></NewsSection>
+            <Suspense fallback="...loading company news">
+                <NewsV2 newsPromise={news}></NewsV2>
+            </Suspense>
+
         </>
     )
 }
