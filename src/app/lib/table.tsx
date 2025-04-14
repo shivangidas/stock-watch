@@ -15,7 +15,7 @@ export default function Table<Type extends Record<string, string | number>, Key 
             <tbody>
                 {bodyData.map(row => {
                     return (<tr key={row[keyId]}>
-                        {Object.entries(row).map((value) => <td key={value[0]}>{value[1]}</td>)}
+                        {Object.entries(row).map(([key, value]) => <td key={key}>{value}</td>)}
                         {link && <td><Link href={`/search/${row.symbol}`}>Company Profile</Link></td>}
                     </tr>)
                 })}

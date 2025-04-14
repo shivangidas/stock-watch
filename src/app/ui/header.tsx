@@ -3,11 +3,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import links from "../lib/links";
 import clsx from "clsx";
+import styles from "./header.module.css"
 
 export default function Header() {
   const pathname = usePathname();
   const navigation = links.map((link) => (
-    <li key={link.href}>
+    <li key={link.href} className={styles.link}>
       <Link
         key={link.href}
         href={link.href}
@@ -24,7 +25,7 @@ export default function Header() {
       <header>
         <h1>Stock Watch</h1>
       </header>
-      <nav>
+      <nav className={styles.nav}>
         <ul>{navigation}</ul>
       </nav>
     </>
