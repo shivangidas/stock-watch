@@ -2,6 +2,9 @@ import Link from "next/link";
 import styles from "./page.module.css";
 
 export default function Table<Type extends Record<string, string | number>, Key extends keyof Type>({ bodyData, keyId, link }: { bodyData: Array<Type>, keyId: Key, link: boolean }) {
+    if (bodyData.length === 0) {
+        return <p>No data found</p>
+    }
     const headersList = Object.keys(bodyData[0])
     const headers = headersList.map(head => <th key={head}>{head}</th>)
     return (
