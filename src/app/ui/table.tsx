@@ -23,6 +23,6 @@ export default function Table<Type extends Record<string, string | number>, Key 
                     </tr>)
                 })}
             </tbody>
-        </table>
+        </table >
     )
 }

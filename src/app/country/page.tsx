@@ -1,6 +1,6 @@
 import { api_key } from "../lib/constants"
 import { Country } from "../lib/definitions"
-import Table from "../lib/table"
+import Table from "../ui/table"
 
 export default async function CountryPage() {
     const data = await fetch(`https://finnhub.io/api/v1/country?token=${api_key}`)
