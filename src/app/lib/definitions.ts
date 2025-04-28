@@ -46,3 +46,14 @@ export type Country = {
   region: string,
   subRegion: string
 }
+
+export type Earning = {
+  "actual": number,
+  "estimate": number,
+  "period": string,
+  "quarter": 1 | 2 | 3 | 4,
+  "surprise": number,
+  "surprisePercent": number,
+  "symbol": string,
+  "year": number
+}

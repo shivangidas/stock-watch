@@ -1,8 +1,9 @@
 import { api_key } from "@/app/lib/constants";
-import { CompanyProfile, News } from "@/app/lib/definitions";
+import { CompanyProfile, Earning, News } from "@/app/lib/definitions";
 import NewsV2 from "@/app/newsV2/news";
 import Link from "next/link";
 import { Suspense } from "react";
+import EarningChart from "./earningChart";
 
 async function getNews(symbol: string) {
     const today = new Date();
@@ -16,24 +17,37 @@ async function getNews(symbol: string) {
     );
     return response.json();
 }
+async function getEarnings(symbol: string) {
+    const response = await fetch(
+        `https://finnhub.io/api/v1/stock/earnings?symbol=${symbol}&token=${api_key}`
+    );
+    return response.json();
+}
 export default async function Page({ params }: { params: Promise<{ symbol: string }> }) {
     const { symbol } = await params
     const response = await fetch(
         `https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=${api_key}`
     );
     const company: CompanyProfile = await response.json();
-    const news: Promise<News[]> = getNews(symbol)
-
+    const news: Promise<News[]> = getNews(symbol);
+    const earnings: Promise<Earning[]> = getEarnings(symbol);
     return (
         <>
-            <h1>{company.name} </h1>
-            {/* <img src={company.logo} alt="Logo" width={100} height={100} /> */}
             <Link href="/search">Back to search page</Link><br />
-            <a href={company.weburl} target="_blank">company site</a>
-            <p>Industry: {company.finnhubIndustry} </p>
-            <p>Exchange: {company.exchange} </p>
-            <p>Country: {company.country} </p>
-            <p>Market cap: {company.marketCapitalization} </p>
+            <section>
+                <h1>{company.name} </h1>
+                <a href={company.weburl} target="_blank">Go to company site</a>
+                <p>Industry: {company.finnhubIndustry} </p>
+                <p>Exchange: {company.exchange} </p>
+                <p>Country: {company.country} </p>
+                <p>Market cap: {company.marketCapitalization} </p>
+            </section>
+            <section>
+                <h3>Earnings surprise</h3>
+                <Suspense fallback="...loading....">
+                    <EarningChart earnings={earnings}></EarningChart>
+                </Suspense>
+            </section>
             <Suspense fallback="...loading company news">
                 <NewsV2 newsPromise={news}></NewsV2>
             </Suspense>
